@@ -17,4 +17,4 @@ El proyecto consiste en el desarrollo de una página web de comercio electrónic
 - Gorosito Noralí
     
 ## Gestión de Proyecto:
-**Trello:** [Link al tablero en Trello]()
+**Trello:** [Link al tablero en Trello](https://trello.com/b/7tfzxEUN/mi-tablero-de-trello)
