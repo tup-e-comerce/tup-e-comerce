@@ -1,0 +1,19 @@
+<main class="login-page">
+    <article class="login-card">
+
+        <header class="login-header">
+            <img class="login-logo" src="assets/logo_clocknails.png" alt="Clock Nails logo" />
+            <h1 class="login-title">Clock Nails</h1>
+            <p class="login-subtitle">Ingresá para continuar</p>
+        </header>
+
+        <button mat-raised-button class="login-button" [disabled]="loading()" (click)="onLogin()">
+            @if (loading()) {
+            <mat-spinner diameter="22" />
+            } @else {
+            Iniciar sesión
+            }
+        </button>
+
+    </article>
+</main>
