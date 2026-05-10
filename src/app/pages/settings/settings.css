@@ -1,0 +1,87 @@
+.settings-page {
+    padding: 1.5rem;
+    max-width: 40rem;
+    margin: 0 auto;
+}
+
+.settings-header {
+    margin-bottom: 2rem;
+}
+
+.settings-title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.settings-section {
+    margin-bottom: 2rem;
+}
+
+.section-title {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.user-card {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--bg-card);
+    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+.user-avatar {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.logout-confirm {
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--bg-card);
+    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+.logout-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.app-info-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--bg-card);
+    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+.app-logo {
+    width: 5rem;
+    height: 5rem;
+    object-fit: contain;
+}
+
+.app-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.user-agent {
+    font-size: 0.75rem;
+    color: var(--text-muted-color);
+    word-break: break-all;
+}
