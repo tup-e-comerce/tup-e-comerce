@@ -26,6 +26,17 @@
     --text-color: #1a1a2e;
     --text-muted-color: #78716c;
     --error-color: #dc2626;
+    --layout-primary: #e91e63;
+    --layout-secondary: #f5f5f5;
+    --layout-text-primary: #333;
+    --layout-text-secondary: #666;
+    --layout-border: #e0e0e0;
+    --layout-error: #ff6b6b;
+    --layout-error-hover: #ff5252;
+    --layout-success: #4caf50;
+    --layout-warning: #ff9800;
+    --layout-shadow-light: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --layout-shadow-medium: 0 8px 16px rgba(0, 0, 0, 0.15);
 
     --heading-font: "Playfair Display", serif;
     --body-font: "Montserrat", sans-serif;

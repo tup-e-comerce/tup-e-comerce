@@ -1,0 +1,17 @@
+<p>bottom-bar works!</p>
+<nav class="bottom-bar">
+  <a class="bottom-bar-item" routerLink="/items" routerLinkActive="active">
+    <mat-icon>shopping_cart</mat-icon>
+    <span>Items</span>
+  </a>
+  
+  <a class="bottom-bar-item" routerLink="/settings" routerLinkActive="active">
+    <mat-icon>settings</mat-icon>
+    <span>Configuración</span>
+  </a>
+
+  <button class="bottom-bar-item logout" (click)="onLogout()">
+    <mat-icon>logout</mat-icon>
+    <span>Salir</span>
+  </button>
+</nav>
