@@ -1,1 +1,79 @@
-<p>items works!</p>
+<main class="items-page">
+  <header class="items-header">
+    <h1>Productos</h1>
+
+    <div class="items-controls">
+      <input
+        type="text"
+        placeholder="Buscar por nombre, marca, descripción o categoría"
+        [ngModel]="searchText()"
+        (ngModelChange)="onSearchChange($event)"
+      />
+
+      <select
+        [ngModel]="sortBy()"
+        (ngModelChange)="onSortChange($event)"
+      >
+        <option value="name">Ordenar por nombre</option>
+        <option value="brand">Ordenar por marca</option>
+        <option value="price">Ordenar por precio</option>
+        <option value="rating">Ordenar por puntaje</option>
+        <option value="category">Ordenar por categoría</option>
+        <option value="product_type">Ordenar por tipo</option>
+      </select>
+    </div>
+  </header>
+
+  @if (loading()) {
+    <section class="loading-container">
+      <mat-spinner diameter="48"></mat-spinner>
+      <p>Cargando productos...</p>
+    </section>
+  }
+
+  @if (!loading() && errorMessage()) {
+    <section class="error-message">
+      <p>{{ errorMessage() }}</p>
+    </section>
+  }
+
+  @if (!loading() && !errorMessage()) {
+    <section class="items-grid">
+      @for (item of filteredItems(); track item.id) {
+        <mat-card class="item-card">
+          <img
+            class="item-image"
+            [src]="item.image_link"
+            [alt]="item.name"
+            (error)="hideBrokenImage($event)"
+          />
+
+          <mat-card-content>
+            <h2>{{ item.name }}</h2>
+
+            <p class="item-brand">
+              {{ item.brand || 'Sin marca' }}
+            </p>
+
+            <p class="item-description">
+              {{ item.description || 'Sin descripción disponible.' }}
+            </p>
+
+            <div class="item-info">
+              <span>Precio: ${{ item.price || '0' }}</span>
+              <span>Puntaje: {{ item.rating || 'Sin puntaje' }}</span>
+            </div>
+
+            <p class="item-category">
+              {{ item.category || item.product_type || 'Sin categoría' }}
+            </p>
+          </mat-card-content>
+        </mat-card>
+      }
+    </section>
+
+    @if (filteredItems().length === 0) {
+      <p class="empty-message">No se encontraron productos.</p>
+    }
+  }
+</main>
