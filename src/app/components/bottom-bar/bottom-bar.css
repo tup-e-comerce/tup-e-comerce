@@ -1,0 +1,54 @@
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background-color: var(--secondary-color);
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 100;
+}
+
+.bottom-bar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px 12px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 12px;
+  transition: color 0.3s ease;
+  flex: 1;
+  height: 100%;
+}
+
+.bottom-bar-item:hover {
+  color: var(--primary-color);
+}
+
+.bottom-bar-item.active {
+  color: var(--primary-color);
+  border-top: 3px solid var(--primary-color);
+}
+
+.bottom-bar-item mat-icon {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+}
+
+.bottom-bar-item.logout {
+  color: var(--error-color);
+}
+
+.bottom-bar-item.logout:hover {
+  color: var(--error-hover);
+}
