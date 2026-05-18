@@ -1,13 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { initializeApp } from 'firebase/app';
-import {
-  getAuth,
-  signInWithPopup,
-  GoogleAuthProvider,
-  signOut,
-  User
-} from 'firebase/auth';
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDdSGd2cM2JemXn7ahXzyJs6bCqvMikIxw",
@@ -20,35 +14,43 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const googleProvider = new GoogleAuthProvider();
+
+export interface AuthUser {
+  displayName: string;
+  email: string;
+}
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private currentUser: User | null = null;
-
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.router.navigate(['/items']);
+      } else {
+        this.router.navigate(['/login']);
+      }
+    });
+  }
 
   login(): Promise<void> {
-    return signInWithPopup(auth, googleProvider).then(result => {
-      this.currentUser = result.user;
-      sessionStorage.setItem('session', 'active');
-      this.router.navigate(['/items']);
-    });
+    const provider = new GoogleAuthProvider();
+    return signInWithPopup(auth, provider).then(() => { });
   }
 
   logout(): Promise<void> {
-    return signOut(auth).then(() => {
-      this.currentUser = null;
-      sessionStorage.removeItem('session');
-      this.router.navigate(['/login']);
-    });
+    return signOut(auth);
   }
 
   isLoggedIn(): boolean {
-    return sessionStorage.getItem('session') === 'active';
+    return auth.currentUser !== null;
   }
 
-  getUser(): User | null {
-    return this.currentUser;
+  getUser(): AuthUser | null {
+    const user = auth.currentUser;
+    if (!user) return null;
+    return {
+      displayName: user.displayName ?? 'Usuario',
+      email: user.email ?? ''
+    };
   }
 }
