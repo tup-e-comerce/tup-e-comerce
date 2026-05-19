@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from 'firebase/auth';
@@ -22,13 +22,28 @@ export interface AuthUser {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  constructor(private router: Router) {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        this.router.navigate(['/items']);
-      } else {
-        this.router.navigate(['/login']);
-      }
+  private authStatePromise: Promise<void>;
+
+  constructor(private router: Router, private zone: NgZone) {
+    this.authStatePromise = new Promise((resolve) => {
+      onAuthStateChanged(auth, (user) => {
+        resolve();
+        this.zone.run(() => {
+          if (user) {
+            if (this.router.url === '/login') {
+              this.router.navigate(['/items']);
+            }
+          } else {
+            this.router.navigate(['/login']);
+          }
+        });
+      });
+    });
+  }
+
+  isAuthenticated(): Promise<boolean> {
+    return this.authStatePromise.then(() => {
+      return auth.currentUser !== null;
     });
   }
 
